@@ -28,11 +28,11 @@ describe('Create a branch based on the input', () => {
 
   it('gets a branch', async () => {
     octokitMock.rest.repos.getBranch.mockRejectedValue(new HttpError())
-    process.env.GITHUB_REPOSITORY = 'peterjgrainger/test-action-changelog-reminder'
+    process.env.GITHUB_REPOSITORY = 'step-security/test-action-changelog-reminder'
     await createBranch(githubMock, context, branch)
     expect(octokitMock.rest.repos.getBranch).toHaveBeenCalledWith({
       repo: 'test-action-changelog-reminder',
-      owner: 'peterjgrainger',
+      owner: 'step-security',
       branch
     })
   });
