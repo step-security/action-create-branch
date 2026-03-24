@@ -23,7 +23,7 @@ Boolean value representing whether or not a new branch was created.
 ## Example usage
 
 ```
-uses: step-security/action-create-branch@v2.2.0
+uses: step-security/action-create-branch@v3
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 with:

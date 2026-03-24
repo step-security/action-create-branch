@@ -1,6 +1,6 @@
 name: 'Create Branch'
 description: 'Creates a branch'
-author: 'Peter Grainger (peter@grainger)'
+author: 'step-security'
 branding:
   icon: 'git-branch'
   color: 'green'
@@ -14,5 +14,5 @@ outputs:
   created:
     description: 'Boolean value representing whether or not a new branch was created.'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
