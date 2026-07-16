@@ -1,9 +1,11 @@
 import * as core from '@actions/core';
 import { getOctokit, context } from '@actions/github';
 import { createBranch } from './create-branch';
+import axios, { isAxiosError } from "axios";
+import { existsSync, readFileSync } from "fs";
 
 async function validateSubscription() {
-  let repoPrivate;
+  let repoPrivate: boolean | undefined;
   const eventPath = process.env.GITHUB_EVENT_PATH;
   if (eventPath && existsSync(eventPath)) {
     const payload = JSON.parse(readFileSync(eventPath, "utf8"));
@@ -16,11 +18,11 @@ async function validateSubscription() {
     "https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions";
 
   core.info("");
-  core.info("\u001b[1;36mStepSecurity Maintained Action\u001b[0m");
+  core.info("StepSecurity Maintained Action");
   core.info(`Secure drop-in replacement for ${upstream}`);
   if (repoPrivate === false)
-    core.info("\u001b[32m\u2713 Free for public repositories\u001b[0m");
-  core.info(`\u001b[36mLearn more:\u001b[0m ${docsUrl}`);
+    core.info("✓ Free for public repositories");
+  core.info(`Learn more: ${docsUrl}`);
   core.info("");
 
   if (repoPrivate === false) return;
@@ -37,10 +39,10 @@ async function validateSubscription() {
   } catch (error) {
     if (isAxiosError(error) && error.response?.status === 403) {
       core.error(
-        `\u001b[1;31mThis action requires a StepSecurity subscription for private repositories.\u001b[0m`,
+        `This action requires a StepSecurity subscription for private repositories.`,
       );
       core.error(
-        `\u001b[31mLearn how to enable a subscription: ${docsUrl}\u001b[0m`,
+        `Learn how to enable a subscription: ${docsUrl}`,
       );
       process.exit(1);
     }
@@ -49,8 +51,8 @@ async function validateSubscription() {
 }
 
 async function run() {
-  await validateSubscription();
   try {
+    await validateSubscription();
     const branch = core.getInput('branch');
     const sha = core.getInput('sha');
     core.debug(`Creating branch ${branch}`);
