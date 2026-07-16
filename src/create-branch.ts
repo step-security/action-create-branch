@@ -22,7 +22,7 @@ export async function createBranch(getOctokit: any, context: Context, branch: st
 
       return resp?.data?.ref === ref;
     } else {
-      throw new Error(error instanceof Error ? error.message : 'Failed to create branch');
+      throw Error(error);
     }
   }
 }

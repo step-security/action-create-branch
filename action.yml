@@ -1,6 +1,6 @@
 name: 'Create Branch'
 description: 'Creates a branch'
-author: 'step-security'
+author: step-security
 branding:
   icon: 'git-branch'
   color: 'green'

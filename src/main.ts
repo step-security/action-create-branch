@@ -1,8 +1,6 @@
 import * as core from '@actions/core';
 import { getOctokit, context } from '@actions/github';
 import { createBranch } from './create-branch';
-import axios, { isAxiosError } from "axios";
-import { existsSync, readFileSync } from "fs";
 
 async function validateSubscription() {
   let repoPrivate;
@@ -51,8 +49,8 @@ async function validateSubscription() {
 }
 
 async function run() {
+  await validateSubscription();
   try {
-    await validateSubscription();
     const branch = core.getInput('branch');
     const sha = core.getInput('sha');
     core.debug(`Creating branch ${branch}`);
