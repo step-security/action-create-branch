@@ -36,5 +36,8 @@
   "homepage": "https://github.com/step-security/action-create-branch#readme",
   "bugs": {
     "url": "https://github.com/step-security/action-create-branch/issues"
+  },
+  "overrides": {
+    "undici": "^6.27.0"
   }
 }
